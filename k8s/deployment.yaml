@@ -71,8 +71,9 @@ kind: Service
 metadata:
   name: fake-shop
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - port: 5000
+      targetPort: 5000
   selector:
     app: fake-shop

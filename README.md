@@ -233,4 +233,4 @@ chmod +x k8s-info.sh
 
 ---
 
-Desenvolvido por Arthus Almeida 👨‍💻, para o desafio DEV OPS PRO 2, Fabricio Veronez
+Desenvolvido por Arthus Almeida 👨‍💻, para o desafio DEV OPS PRO 2, Fabricio Veronez  
