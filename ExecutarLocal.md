@@ -1,10 +1,12 @@
+# 🛒 Fake Shop - Kubernetes (k3d) Setup
 
-🛒 Fake Shop - Kubernetes (k3d) Setup
+Este repositório contém os arquivos e instruções para executar a aplicação Fake Shop em um cluster local do Kubernetes utilizando o `k3d`.
+ATENÇÃO - Os ips e configuraçoes de portas nesse quia se baseam na maquina do autor, é possivel haver mudanças para cada cluster craido.
+---
 
-Este repositório contém os arquivos e instruções para executar a aplicação Fake Shop em um cluster local do Kubernetes utilizando o k3d.
+## 📁 Estrutura do Projeto
 
-📁 Estrutura do Projeto
-
+```
 fake-shop/
 ├── k8s/
 │   └── deployment.yaml         # Manifestos Kubernetes
@@ -13,94 +15,213 @@ fake-shop/
 │   ├── index.py                # App Flask
 │   └── ...
 └── README.md                   # Este arquivo
+```
 
-🚀 Requisitos
+---
 
-Docker
+## 🏗️ Arquitetura do Cluster k3d-fake-shop
 
-kubectl
+```
+╭───────────────────────────────╮
+│      Cluster: k3d-fake-shop   │
+│  (Kubernetes v1.31.5+k3s1)    │
+╰───────────────────────────────╯
+            │
+            ├── Nodes (3)
+            │   ├─ k3d-fake-shop-server-0 (control-plane) - IP: 172.21.0.3
+            │   ├─ k3d-fake-shop-agent-0 (worker)         - IP: 172.21.0.4
+            │   └─ k3d-fake-shop-agent-1 (worker)         - IP: 172.21.0.5
+            │
+            ├── Deployments (default)
+            │   ├─ fake-shop (1 pod)
+            │   └─ postgre (1 pod)
+            │
+            ├── Services (default namespace)
+            │   ├─ fake-shop  [NodePort]     → 5000:31263
+            │   └─ postgre    [ClusterIP]    → 5432
+            │
+            ├── Services (kube-system)
+            │   ├─ kube-dns         [ClusterIP]    → DNS interno
+            │   ├─ metrics-server   [ClusterIP]    → Coleta de métricas
+            │   └─ traefik          [LoadBalancer] → 80:30442, 443:31338
+            │
+            └── Load Balancer (Docker Container)
+                └─ k3d-fake-shop-serverlb
+                   ↳ Redireciona porta 5000 externa → 31263 (fake-shop)
+```
 
-k3d
 
-Extensão SQLTools (VS Code, opcional)
+## 🚀 Requisitos
 
-🏗️ Criar o Cluster Local
+- Docker
+- kubectl
+- k3d
+- Extensão SQLTools (VS Code, opcional)
 
+---
+
+## 🏗️ Criar o Cluster Local
+
+```bash
 k3d cluster create fake-shop --agents 2 --port 5000:30000@loadbalancer
+```
 
-🐳 Build da imagem Docker
+---
+
+## 🐳 Build da imagem Docker
 
 A partir do diretório raiz do projeto:
 
+```bash
 docker build -t arthusagufc/fake-shop-desafio:v1 -f src/Dockerfile src/
 docker push arthusagufc/fake-shop-desafio:v1
+```
 
-☸️ Aplicar os manifestos
+---
 
+## ☸️ Aplicar os manifestos
+
+```bash
 kubectl apply -f k8s/deployment.yaml
+```
 
 Verifique:
 
+```bash
 kubectl get pods
 kubectl get service
+```
 
-🌍 Acessar a aplicação (via NodePort)
+---
+
+## 🌍 Acessar a aplicação (via NodePort)
 
 Localmente:
 
+```bash
 http://localhost:31263
+```
 
-🔁 Alternativa: Port Forward
+---
 
+## 🔁 Alternativa: Port Forward
+
+```bash
 kubectl port-forward service/fake-shop 5001:5000
+```
 
 Acesse:
 
+```bash
 http://localhost:5001
+```
 
-🧪 Acessar o banco PostgreSQL com SQLTools
+---
 
+## 🧪 Acessar o banco PostgreSQL com SQLTools
+
+```bash
 kubectl port-forward service/postgre 5433:5432
+```
 
 Configuração no SQLTools:
 
-Host: localhost
+- **Host**: localhost
+- **Porta**: 5433
+- **Database**: ecommerce
+- **Usuário**: ecommerce
+- **Senha**: Pg1234
 
-Porta: 5433
+---
 
-Database: ecommerce
+## 🧰 Ver informações do cluster Kubernetes
 
-Usuário: ecommerce
+### Criar o script `k8s-info.sh`
 
-Senha: Pg1234
+```bash
+nano k8s-info.sh
+```
 
-📦 Comandos úteis
+### Conteúdo do script:
 
-Ver em qual nó está cada pod:
+```bash
+#!/bin/bash
 
-kubectl get pods -o wide
+echo "============================="
+echo "🔧 CONTEXTO ATUAL DO KUBECTL"
+echo "============================="
+kubectl config current-context
+echo ""
 
-Escalar réplicas:
+echo "============================="
+echo "📋 LISTA DE CONTEXTOS"
+echo "============================="
+kubectl config get-contexts
+echo ""
 
-kubectl scale deployment fake-shop --replicas=3
+echo "============================="
+echo "🔍 DETALHES DO CONTEXTO ATUAL"
+echo "============================="
+kubectl config view --minify
+echo ""
 
-Ver logs:
+echo "============================="
+echo "☸️  INFO DO CLUSTER"
+echo "============================="
+kubectl cluster-info
+echo ""
 
-kubectl logs deployment/fake-shop
+echo "============================="
+echo "🧠 VERSÃO DO CLUSTER"
+echo "============================="
+kubectl version
+echo ""
 
-Deletar tudo:
+echo "============================="
+echo "🧱 NÓS DO CLUSTER"
+echo "============================="
+kubectl get nodes -o wide
+echo ""
 
-kubectl delete -f k8s/deployment.yaml
-k3d cluster delete fake-shop
+echo "============================="
+echo "📦 PODS (TODOS OS NAMESPACES)"
+echo "============================="
+kubectl get pods -A
+echo ""
 
-🧠 Topologia Resumida
+echo "============================="
+echo "🌐 SERVIÇOS (TODOS OS NAMESPACES)"
+echo "============================="
+kubectl get svc -A
+echo ""
 
-[ Navegador ] --> localhost:31263 (NodePort)
-                     |
-              [ fake-shop Pod ]
-                     |
-              [ postgre Service (ClusterIP) ]
-                     |
-              [ postgre Pod ]
+echo "============================="
+echo "🚀 DEPLOYMENTS"
+echo "============================="
+kubectl get deployments -A
+echo ""
 
-Desenvolvido por Yvens Almeida 👨‍💻
+echo "============================="
+echo "🐳 CONTAINERS DOCKER RELACIONADOS AO K3D"
+echo "============================="
+docker ps | grep k3d
+echo ""
+
+echo "============================="
+echo "🧱 LISTA DE CLUSTERS K3D"
+echo "============================="
+k3d cluster list
+echo ""
+```
+
+### Tornar executável:
+
+```bash
+chmod +x k8s-info.sh
+```
+
+### Rodar:
+
+```bash
+./k8s-info.sh
+```
