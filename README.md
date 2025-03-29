@@ -1,235 +1,60 @@
-# 🛒 Fake Shop - Kubernetes (k3d) Setup
+# 🛒 Fake Shop – Desafio DEVOPS PRO
 
-Este repositório contém os arquivos e instruções para executar a aplicação Fake Shop em um cluster local do Kubernetes utilizando o `k3d`.
+Este projeto representa uma **simulação de entrega e monitoramento de software em ambiente de produção**, com foco em **resiliência, escalabilidade e automação**. A aplicação foi implantada em um **cluster Kubernetes** gerenciado na **DigitalOcean**, utilizando práticas modernas de **Integração Contínua e Entrega Contínua (CI/CD)** via **GitHub Actions**.
 
----
-
-## 📁 Estrutura do Projeto
-
-```
-fake-shop/
-├── k8s/
-│   └── deployment.yaml         # Manifestos Kubernetes
-├── src/
-│   ├── Dockerfile              # Imagem da aplicação
-│   ├── index.py                # App Flask
-│   └── ...
-└── README.md                   # Este arquivo
-```
+O objetivo é simular na prática como equipes de desenvolvimento podem entregar novas versões de um sistema de forma confiável, rápida e padronizada, minimizando erros humanos e tempo de inatividade.
 
 ---
 
-## 🏗️ Arquitetura do Cluster k3d-fake-shop
+## 🎯 Objetivo do Projeto
 
-```
-╭───────────────────────────────╮
-│      Cluster: k3d-fake-shop   │
-│  (Kubernetes v1.31.5+k3s1)    │
-╰───────────────────────────────╯
-            │
-            ├── Nodes (3)
-            │   ├─ k3d-fake-shop-server-0 (control-plane) - IP: 172.21.0.3
-            │   ├─ k3d-fake-shop-agent-0 (worker)         - IP: 172.21.0.4
-            │   └─ k3d-fake-shop-agent-1 (worker)         - IP: 172.21.0.5
-            │
-            ├── Deployments (default)
-            │   ├─ fake-shop (1 pod)
-            │   └─ postgre (1 pod)
-            │
-            ├── Services (default namespace)
-            │   ├─ fake-shop  [NodePort]     → 5000:31263
-            │   └─ postgre    [ClusterIP]    → 5432
-            │
-            ├── Services (kube-system)
-            │   ├─ kube-dns         [ClusterIP]    → DNS interno
-            │   ├─ metrics-server   [ClusterIP]    → Coleta de métricas
-            │   └─ traefik          [LoadBalancer] → 80:30442, 443:31338
-            │
-            └── Load Balancer (Docker Container)
-                └─ k3d-fake-shop-serverlb
-                   ↳ Redireciona porta 5000 externa → 31263 (fake-shop)
-```
+Criar um pipeline completo de CI/CD que:
 
-### 📷 Imagem da arquitetura
-
-![Arquitetura do Cluster](./A_diagram_in_flat_design_style_showcases_the_archi.png)
+- Faça o **build da imagem Docker** da aplicação Fake Shop
+- Publique a imagem no **Docker Hub**
+- Faça o **deploy automático** no **Kubernetes (DigitalOcean)**a cada alteração no repositório
+- Reduza o tempo e complexidade do deploy, permitindo maior agilidade para os desenvolvedores
+- Monitoramento de metricas via PROMETHEUS E GRAFANA
 
 ---
 
-## 🚀 Requisitos
+## 🛠️ Tecnologias Utilizadas
 
-- Docker
-- kubectl
-- k3d
-- Extensão SQLTools (VS Code, opcional)
-
----
-
-## 🏗️ Criar o Cluster Local
-
-```bash
-k3d cluster create fake-shop --agents 2 --port 5000:30000@loadbalancer
-```
+- [Python Flask](https://flask.palletsprojects.com/) – Backend da aplicação
+- [Docker](https://www.docker.com/) – Containerização
+- [Docker Hub](https://hub.docker.com/) – Repositório de imagens
+- [Kubernetes](https://kubernetes.io/) – Orquestração de containers
+- [DigitalOcean](https://www.digitalocean.com/) – Cluster Kubernetes gerenciado
+- [GitHub Actions](https://github.com/features/actions) – CI/CD
 
 ---
 
-## 🐳 Build da imagem Docker
+## 🚀 Links de acesso
 
-A partir do diretório raiz do projeto:
+🔗 **Aplicação rodando na DigitalOcean**  
+➡️ [http://164.90.252.146:5000](http://164.90.252.146:5000)
 
-```bash
-docker build -t arthusagufc/fake-shop-desafio:v1 -f src/Dockerfile src/
-docker push arthusagufc/fake-shop-desafio:v1
-```
-
----
-
-## ☸️ Aplicar os manifestos
-
-```bash
-kubectl apply -f k8s/deployment.yaml
-```
-
-Verifique:
-
-```bash
-kubectl get pods
-kubectl get service
-```
+🐳 **Repositório Docker Hub da imagem**  
+➡️ [https://hub.docker.com/r/arthusagufc/fake-shop-desafio](https://hub.docker.com/r/arthusagufc/fake-shop-desafio)
 
 ---
 
-## 🌍 Acessar a aplicação (via NodePort)
-
-Localmente:
-
-```bash
-http://localhost:31263
-```
-
+## 📦 Quias de execução e testes disponiveis em:
+- Cluster local :
+- Consultas no banco:
+- Pipeline CI/CD:
+- Monitoramento:
+  
 ---
 
-## 🔁 Alternativa: Port Forward
+## 📌 Considerações Finais
 
-```bash
-kubectl port-forward service/fake-shop 5001:5000
-```
+Durante o desenvolvimento foram realizados testes com:
 
-Acesse:
-
-```bash
-http://localhost:5001
-```
-
----
-
-## 🧪 Acessar o banco PostgreSQL com SQLTools
-
-```bash
-kubectl port-forward service/postgre 5433:5432
-```
-
-Configuração no SQLTools:
-
-- **Host**: localhost
-- **Porta**: 5433
-- **Database**: ecommerce
-- **Usuário**: ecommerce
-- **Senha**: Pg1234
-
----
-
-## 🧰 Ver informações do cluster Kubernetes
-
-### Criar o script `k8s-info.sh`
-
-```bash
-nano k8s-info.sh
-```
-
-### Conteúdo do script:
-
-```bash
-#!/bin/bash
-
-echo "============================="
-echo "🔧 CONTEXTO ATUAL DO KUBECTL"
-echo "============================="
-kubectl config current-context
-echo ""
-
-echo "============================="
-echo "📋 LISTA DE CONTEXTOS"
-echo "============================="
-kubectl config get-contexts
-echo ""
-
-echo "============================="
-echo "🔍 DETALHES DO CONTEXTO ATUAL"
-echo "============================="
-kubectl config view --minify
-echo ""
-
-echo "============================="
-echo "☸️  INFO DO CLUSTER"
-echo "============================="
-kubectl cluster-info
-echo ""
-
-echo "============================="
-echo "🧠 VERSÃO DO CLUSTER"
-echo "============================="
-kubectl version
-echo ""
-
-echo "============================="
-echo "🧱 NÓS DO CLUSTER"
-echo "============================="
-kubectl get nodes -o wide
-echo ""
-
-echo "============================="
-echo "📦 PODS (TODOS OS NAMESPACES)"
-echo "============================="
-kubectl get pods -A
-echo ""
-
-echo "============================="
-echo "🌐 SERVIÇOS (TODOS OS NAMESPACES)"
-echo "============================="
-kubectl get svc -A
-echo ""
-
-echo "============================="
-echo "🚀 DEPLOYMENTS"
-echo "============================="
-kubectl get deployments -A
-echo ""
-
-echo "============================="
-echo "🐳 CONTAINERS DOCKER RELACIONADOS AO K3D"
-echo "============================="
-docker ps | grep k3d
-echo ""
-
-echo "============================="
-echo "🧱 LISTA DE CLUSTERS K3D"
-echo "============================="
-k3d cluster list
-echo ""
-```
-
-### Tornar executável:
-
-```bash
-chmod +x k8s-info.sh
-```
-
-### Rodar:
-
-```bash
-./k8s-info.sh
-```
+- Deploy local via [k3d](https://k3d.io/)
+- Validação da imagem Docker diretamente no pod (`kubectl exec`)
+- Análise do HTML no navegador via DevTools
+- Acompanhamento do rollout com `kubectl get pods`, `rollout status`, etc.
 
 ---
 
