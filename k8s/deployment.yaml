@@ -50,7 +50,7 @@ spec:
     spec:
       containers:
         - name: fake-shop
-          image: arthusagufc/fake-shop-desafio  # 👈 sem tag fixa
+          image: arthusagufc/fake-shop-desafio:v0
           ports:
             - containerPort: 5000
           env:
