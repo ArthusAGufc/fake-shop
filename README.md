@@ -10,26 +10,27 @@ O objetivo é simular na prática como equipes de desenvolvimento podem entregar
 
 Criar um pipeline completo de CI/CD que:
 
-- Faça o **build da imagem Docker** da aplicação Fake Shop
-- Publique a imagem no **Docker Hub**
-- Faça o **deploy automático** no **Kubernetes (DigitalOcean)**a cada alteração no repositório
-- Reduza o tempo e complexidade do deploy, permitindo maior agilidade para os desenvolvedores
-- Monitoramento de metricas via PROMETHEUS E GRAFANA
+- Faça o **build da imagem Docker** da aplicação Fake Shop  
+- Publique a imagem no **Docker Hub**  
+- Faça o **deploy automático** no **Kubernetes (DigitalOcean)** a cada alteração no repositório  
+- Reduza o tempo e complexidade do deploy, permitindo maior agilidade para os desenvolvedores  
+- Inclua **monitoramento de métricas** via **Prometheus** e **Grafana**
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- [Python Flask](https://flask.palletsprojects.com/) – Backend da aplicação
-- [Docker](https://www.docker.com/) – Containerização
-- [Docker Hub](https://hub.docker.com/) – Repositório de imagens
-- [Kubernetes](https://kubernetes.io/) – Orquestração de containers
-- [DigitalOcean](https://www.digitalocean.com/) – Cluster Kubernetes gerenciado
-- [GitHub Actions](https://github.com/features/actions) – CI/CD
+- [Python Flask](https://flask.palletsprojects.com/) – Backend da aplicação  
+- [Docker](https://www.docker.com/) – Containerização  
+- [Docker Hub](https://hub.docker.com/) – Repositório de imagens  
+- [Kubernetes](https://kubernetes.io/) – Orquestração de containers  
+- [DigitalOcean](https://www.digitalocean.com/) – Cluster Kubernetes gerenciado  
+- [GitHub Actions](https://github.com/features/actions) – CI/CD  
+- [Prometheus](https://prometheus.io/) & [Grafana](https://grafana.com/) – Monitoramento  
 
 ---
 
-## 🚀 Links de acesso
+## 🚀 Links de Acesso
 
 🔗 **Aplicação rodando na DigitalOcean**  
 ➡️ [http://164.90.252.146:5000](http://164.90.252.146:5000)
@@ -39,23 +40,38 @@ Criar um pipeline completo de CI/CD que:
 
 ---
 
-## 📦 Guias de execução e testes disponiveis em:
-- Cluster local: ExecutarLocal.md
-- Consultas no banco: consultas_fake_shop.sql.md
-- Pipeline CI/CD: Quia CI-CD.md
-- Monitoramento: 
-  
+## 📸 Capturas do Projeto
+
+| Aplicação em Produção | Terminal (CI/CD, kubectl) |
+|------------------------|----------------------------|
+| ![Aplicação](Guia da aplicação/app.png) | ![Terminal](docs/imgs/terminal.png) |
+
+| DigitalOcean - Cluster Kubernetes | Dashboard Grafana |
+|----------------------------------|--------------------|
+| ![DigitalOcean](docs/imgs/digitalocean.png) | ![Grafana](docs/imgs/grafana.png) |
+
+---
+
+## 📦 Guias de Execução
+
+- ✅ Cluster local: [`ExecutarLocal.md`](./ExecutarLocal.md)  
+- 📊 Consultas no banco: [`consultas_fake_shop.sql.md`](./consultas_fake_shop.sql.md)  
+- 🔄 Pipeline CI/CD: [`Guia CI-CD.md`](./Guia%20CI-CD.md)  
+- 📈 Monitoramento com Prometheus e Grafana: [`Monitoramento.md`](./Monitoramento.md)  
+
 ---
 
 ## 📌 Considerações Finais
 
 Durante o desenvolvimento foram realizados testes com:
 
-- Deploy local via [k3d](https://k3d.io/)
-- Validação da imagem Docker diretamente no pod (`kubectl exec`)
-- Análise do HTML no navegador via DevTools
-- Acompanhamento do rollout com `kubectl get pods`, `rollout status`, etc.
+- Deploy local via [k3d](https://k3d.io/)  
+- Validação da imagem Docker diretamente no pod (`kubectl exec`)  
+- Análise do HTML no navegador via DevTools  
+- Acompanhamento do rollout com `kubectl get pods`, `rollout status`, entre outros comandos
 
 ---
 
-Desenvolvido por Arthus Almeida 👨‍💻, para o desafio DEV OPS PRO 2, Fabricio Veronez  
+Desenvolvido por **Arthus Almeida** 👨‍💻  
+Desafio **DEVOPS PRO 2 – Fabricio Veronez**
+
