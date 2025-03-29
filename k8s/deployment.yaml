@@ -23,7 +23,7 @@ spec:
               value: ecommerce
             - name: POSTGRES_DB
               value: ecommerce
---- 
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -34,8 +34,7 @@ spec:
     - port: 5432
   selector:
     app: postgre
-
---- 
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -51,7 +50,7 @@ spec:
     spec:
       containers:
         - name: fake-shop
-          image: arthusagufc/fake-shop-desafio:v1
+          image: arthusagufc/fake-shop-desafio  # 👈 sem tag fixa
           ports:
             - containerPort: 5000
           env:
