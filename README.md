@@ -39,7 +39,7 @@ Criar um pipeline completo de CI/CD que:
 
 ---
 
-## 📦 Quias de execução e testes disponiveis em:
+## 📦 Guias de execução e testes disponiveis em:
 - Cluster local: ExecutarLocal.md
 - Consultas no banco: consultas_fake_shop.sql.md
 - Pipeline CI/CD: Quia CI-CD.md
