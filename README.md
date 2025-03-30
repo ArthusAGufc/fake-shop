@@ -42,14 +42,13 @@ Criar um pipeline completo de CI/CD que:
 
 ## 📸 Capturas do Projeto
 
-| Aplicação em Produção | Terminal (CI/CD, kubectl) |
-|------------------------|----------------------------|
-| ![Aplicação](fake-shop/Guia da aplicação/app.png) | ![Terminal](fake-shop/Guia da aplicação/Cluster.png) |
+| Aplicação                        | Terminal (Cluster)                   |
+|----------------------------------|--------------------------------------|
+| ![](./Guia%20da%20aplica%C3%A7%C3%A3o/App.png) | ![](./Guia%20da%20aplica%C3%A7%C3%A3o/Cluster.png) |
 
-| DigitalOcean - Cluster Kubernetes | Dashboard Grafana |
-|----------------------------------|--------------------|
-| ![DigitalOcean](fake-shop/Guia da aplicação/DigitalOcean.png) | ![Grafana](docs/imgs/grafana.png) |
-
+| DigitalOcean (Cluster)           |
+|----------------------------------|
+| ![](./Guia%20da%20aplica%C3%A7%C3%A3o/DigitalOcean.png) |
 ---
 
 ## 📦 Guias de Execução
