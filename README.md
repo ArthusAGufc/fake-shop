@@ -6,6 +6,11 @@ O objetivo é simular na prática como equipes de desenvolvimento podem entregar
 
 ---
 
+| PROJETO                          |
+|----------------------------------|
+| ![](./Guia%20da%20aplica%C3%A7%C3%A3o/projeto.png) |
+
+---
 ## 🎯 Objetivo do Projeto
 
 Criar um pipeline completo de CI/CD que:
@@ -49,14 +54,19 @@ Criar um pipeline completo de CI/CD que:
 | DigitalOcean (Cluster)           |
 |----------------------------------|
 | ![](./Guia%20da%20aplica%C3%A7%C3%A3o/DigitalOcean.png) |
+
+| Prometheus                       | Grafana                 |
+|----------------------------------|--------------------------------------|
+| ![](./Guia%20da%20aplica%C3%A7%C3%A3o/prometheus.png) | ![](./Guia%20da%20aplica%C3%A7%C3%A3o/grafana.png) |
+
 ---
 
 ## 📦 Guias de Execução
 
-- ✅ Cluster local: [`ExecutarLocal.md`](./ExecutarLocal.md)  
-- 📊 Consultas no banco: [`consultas_fake_shop.sql.md`](./consultas_fake_shop.sql.md)  
-- 🔄 Pipeline CI/CD: [`Guia CI-CD.md`](./Guia%20CI-CD.md)  
-- 📈 Monitoramento com Prometheus e Grafana: [`Monitoramento.md`](./Monitoramento.md)  
+✅ Cluster local: [`ExecutarLocal.md`](./Guia%20da%20aplica%C3%A7%C3%A3o/ExecutarLocal.md)  
+📄 Consultas no banco: [`consultas_fake_shop.sql.md`](./Guia%20da%20aplica%C3%A7%C3%A3o/consultas_fake_shop.sql.md)  
+🚀 Pipeline CI/CD: [`Guia CI-CD.md`](./Guia%20da%20aplica%C3%A7%C3%A3o/Guia%20CI-CD.md)  
+📊 Monitoramento com Prometheus e Grafana: [`Monitoramento.md`](./Guia%20da%20aplica%C3%A7%C3%A3o/Monitoramento.md)
 
 ---
 
