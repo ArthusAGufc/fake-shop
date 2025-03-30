@@ -91,5 +91,5 @@ Durante o desenvolvimento foram realizados testes com:
 
 ---
 Desenvolvido por **Arthus Almeida** 👨‍💻  
-Desafio **DEVOPS PRO 2 – Fabricio Veronez**
+Desafio **DEVOPS PRO 2 e 3 – Fabricio Veronez**
 
