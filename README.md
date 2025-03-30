@@ -44,11 +44,11 @@ Criar um pipeline completo de CI/CD que:
 
 | Aplicação em Produção | Terminal (CI/CD, kubectl) |
 |------------------------|----------------------------|
-| ![Aplicação](Guia da aplicação/app.png) | ![Terminal](docs/imgs/terminal.png) |
+| ![Aplicação](fake-shop/Guia da aplicação/app.png) | ![Terminal](fake-shop/Guia da aplicação/Cluster.png) |
 
 | DigitalOcean - Cluster Kubernetes | Dashboard Grafana |
 |----------------------------------|--------------------|
-| ![DigitalOcean](docs/imgs/digitalocean.png) | ![Grafana](docs/imgs/grafana.png) |
+| ![DigitalOcean](fake-shop/Guia da aplicação/DigitalOcean.png) | ![Grafana](docs/imgs/grafana.png) |
 
 ---
 
