@@ -80,6 +80,7 @@ Durante o desenvolvimento foram realizados testes com:
 - Acompanhamento do rollout com `kubectl get pods`, `rollout status`, entre outros comandos
 
 ---
+
 ---
 
 <h2 align="center">🏅 BADGE DE ENTREGA </h2>
@@ -90,6 +91,17 @@ Durante o desenvolvimento foram realizados testes com:
 </p>
 
 ---
+
+## 🔗 Desafio Relacionado
+
+Este projeto faz parte de uma sequência de desafios propostos no curso **DevOps PRO*.
+
+🔍 Acesse também o repositório do desafio **Conversão de Distâncias** (Docker):
+
+👉 [`Conversão de Distâncias - Desafio Docker`](https://github.com/ArthusAGufc/conversao-distancia)
+
+---
+
 Desenvolvido por **Arthus Almeida** 👨‍💻  
 Desafio **DEVOPS PRO 2 e 3 – Fabricio Veronez**
 
