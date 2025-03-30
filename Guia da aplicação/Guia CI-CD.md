@@ -2,6 +2,13 @@
 
 A pipeline é executada automaticamente a cada push na branch `main` ou de forma manual via GitHub Actions.
 
+## ATENÇÃO SE NAO DESEJA EXECUTAR O ACTION NO COMMIT, escreva nos comentarios 
+
+```bash
+[skip ci]
+```
+---
+
 ### 🔨 Etapas:
 
 #### CI (Build)
