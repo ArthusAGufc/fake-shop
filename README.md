@@ -1,4 +1,4 @@
-# 🛒 Fake Shop – Desafio DEVOPS PRO
+# 🛒 Fake Shop – Desafio DEVOPS PRO 2 E 3
 
 Este projeto representa uma **simulação de entrega e monitoramento de software em ambiente de produção**, com foco em **resiliência, escalabilidade e automação**. A aplicação foi implantada em um **cluster Kubernetes** gerenciado na **DigitalOcean**, utilizando práticas modernas de **Integração Contínua e Entrega Contínua (CI/CD)** via **GitHub Actions**.
 
@@ -80,7 +80,16 @@ Durante o desenvolvimento foram realizados testes com:
 - Acompanhamento do rollout com `kubectl get pods`, `rollout status`, entre outros comandos
 
 ---
+---
 
+<h2 align="center">🏅 BADGE DE ENTREGA </h2>
+
+<p align="center">
+  <img src="./Guia%20da%20aplica%C3%A7%C3%A3o/Desafio%20DevOps%20%26%20Cloud%20-%20Desafio%20Pipeline%20CICD%20-%202025-03-23.png" alt="Badge Pipeline CI/CD" width="250"/>
+  <img src="./Guia%20da%20aplica%C3%A7%C3%A3o/Desafio%20DevOps%20%26%20Cloud%20-%20Desafio%20Kubernetes%20-%202025-03-23.png" alt="Badge Kubernetes" width="250"/>
+</p>
+
+---
 Desenvolvido por **Arthus Almeida** 👨‍💻  
 Desafio **DEVOPS PRO 2 – Fabricio Veronez**
 
