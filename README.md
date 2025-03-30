@@ -94,7 +94,7 @@ Durante o desenvolvimento foram realizados testes com:
 
 ## 🔗 Desafio Relacionado
 
-Este projeto faz parte de uma sequência de desafios propostos no curso **DevOps PRO*.
+Este projeto faz parte de uma sequência de desafios propostos no curso **DEVOPS PRO**.
 
 🔍 Acesse também o repositório do desafio **Conversão de Distâncias** (Docker):
 
