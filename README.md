@@ -38,7 +38,7 @@ Criar um pipeline completo de CI/CD que:
 ## 🚀 Links de Acesso
 
 🔗 **Aplicação rodando na DigitalOcean**  
-➡️ [http://164.90.252.146:5000](http://164.90.252.146:5000)
+➡️ [http://164.90.252.146:5000](http://157.230.67.86:5000)
 
 🐳 **Repositório Docker Hub da imagem**  
 ➡️ [https://hub.docker.com/r/arthusagufc/fake-shop-desafio](https://hub.docker.com/r/arthusagufc/fake-shop-desafio)
